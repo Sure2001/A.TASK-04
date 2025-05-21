@@ -1,0 +1,20 @@
+.register-form {
+  max-width: 500px;
+  margin: 30px auto;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.register-form .form-label {
+  font-weight: 500;
+}
+
+.register-form .btn {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.register-form h3 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}

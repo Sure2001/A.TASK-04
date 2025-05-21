@@ -1,0 +1,89 @@
+<form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate class="register-form shadow-sm p-4 border rounded bg-white">
+
+  <h3 class="mb-4 text-primary text-center">Angular 14 Template-Driven Form Validation</h3>
+
+  <!-- Name -->
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" class="form-control" name="name" [(ngModel)]="user.name" required #name="ngModel"
+      [ngClass]="{ 'is-invalid': submitted && name.invalid }" />
+    <div class="invalid-feedback" *ngIf="submitted && name.errors?.['required']">
+      Name is required
+    </div>
+  </div>
+
+  <!-- Mobile Number -->
+  <div class="mb-3">
+    <label class="form-label">Mobile No</label>
+    <input type="text" class="form-control" name="mobileNo" [(ngModel)]="user.mobileNo" required pattern="^[0-9]{10}$"
+      #mobileNo="ngModel" [ngClass]="{ 'is-invalid': submitted && mobileNo.invalid }" />
+    <div class="invalid-feedback" *ngIf="submitted && mobileNo.errors?.['required']">
+      Mobile number is required
+    </div>
+    <div class="invalid-feedback" *ngIf="submitted && mobileNo.errors?.['pattern']">
+      Must be a 10-digit number
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" [(ngModel)]="user.email" required email #email="ngModel"
+      [ngClass]="{ 'is-invalid': submitted && email.invalid }" />
+    <div class="invalid-feedback" *ngIf="submitted && email.errors?.['required']">
+      Email is required
+    </div>
+    <div class="invalid-feedback" *ngIf="submitted && email.errors?.['email']">
+      Invalid email
+    </div>
+  </div>
+
+  <!-- Date of Birth -->
+  <div class="mb-3">
+    <label class="form-label">Date of Birth</label>
+    <input type="date" class="form-control" name="dob" [(ngModel)]="user.dob" required #dob="ngModel"
+      [ngClass]="{ 'is-invalid': submitted && dob.invalid }" />
+    <div class="invalid-feedback" *ngIf="submitted && dob.errors?.['required']">
+      DOB is required
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="mb-3">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="user.password" required minlength="6"
+      #password="ngModel" [ngClass]="{ 'is-invalid': submitted && password.invalid }" />
+    <div class="invalid-feedback" *ngIf="submitted && password.errors?.['required']">
+      Password is required
+    </div>
+    <div class="invalid-feedback" *ngIf="submitted && password.errors?.['minlength']">
+      Minimum 6 characters required
+    </div>
+  </div>
+
+  <!-- Confirm Password -->
+  <div class="mb-3">
+    <label class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="user.confirmPassword" required
+      #confirmPassword="ngModel"
+      [ngClass]="{ 'is-invalid': submitted && (confirmPassword.invalid || user.password !== user.confirmPassword) }" />
+    <div class="invalid-feedback" *ngIf="submitted && confirmPassword.errors?.['required']">
+      Confirm Password is required
+    </div>
+    <div class="invalid-feedback" *ngIf="submitted && user.password !== user.confirmPassword">
+      Passwords do not match
+    </div>
+  </div>
+
+  <!-- Terms -->
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" name="acceptTerms" [(ngModel)]="user.acceptTerms" required
+      #acceptTerms="ngModel" [ngClass]="{ 'is-invalid': submitted && acceptTerms.invalid }" />
+    <label class="form-check-label">I accept the terms and conditions</label>
+    <div class="invalid-feedback" *ngIf="submitted && acceptTerms.errors?.['required']">
+      You must accept the terms
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
